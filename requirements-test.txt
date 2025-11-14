@@ -1,0 +1,19 @@
+# Testing Framework
+pytest>=7.4.0
+pytest-django>=4.5.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Test Data Generation
+faker>=19.0.0
+factory-boy>=3.3.0
+
+# API Testing
+requests>=2.31.0
+responses>=0.23.0
+
+# Code Quality
+pytest-xdist>=3.3.0  # Parallel test execution
+pytest-timeout>=2.1.0  # Test timeout management
+
+
