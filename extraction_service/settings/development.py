@@ -20,9 +20,9 @@ DATABASES = {
 # CORS settings for development
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Django Debug Toolbar (optional)
-if DEBUG:
-    INSTALLED_APPS += ['debug_toolbar']
-    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
-    INTERNAL_IPS = ['127.0.0.1']
+# Django Debug Toolbar (optional - uncomment if installed)
+# if DEBUG:
+#     INSTALLED_APPS += ['debug_toolbar']
+#     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+#     INTERNAL_IPS = ['127.0.0.1']
 

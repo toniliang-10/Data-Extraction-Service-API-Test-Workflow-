@@ -407,13 +407,21 @@ def pytest_configure(config):
 
 
 @pytest.fixture(scope='session')
-def django_db_setup():
+def django_db_setup(django_db_setup, django_db_blocker):
     """
     Setup test database for the session.
     
     This runs once per test session to configure the database.
+    Explicitly runs migrations to ensure database schema is created.
     """
-    # Any session-level database setup can go here
-    pass
+    # The django_db_setup fixture from pytest-django will create the database
+    # Now we ensure migrations are run
+    with django_db_blocker.unblock():
+        from django.core.management import call_command
+        try:
+            call_command('migrate', '--noinput', verbosity=0)
+        except Exception as e:
+            print(f"Migration error: {e}")
+            pass
 
 

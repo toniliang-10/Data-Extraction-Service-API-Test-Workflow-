@@ -157,19 +157,24 @@ After running tests, verify:
 
 ---
 
-## Expected Test Results
+## Current Test Results (After Setup)
 
 ### Summary Output:
 ```
 ============================= test session starts ==============================
 collected 65 items
 
-tests/test_seeded_data.py ...................... [ 30%]
-tests/test_edge_cases.py ............................... [ 78%]
-tests/test_real_extraction.py .............. [100%]
+tests/test_edge_cases.py - 11 passed, 20 failed
+tests/test_real_extraction.py - 7 passed, 7 failed  
+tests/test_seeded_data.py - 2 passed, 18 failed
 
-============================== 65 passed in 25.32s ==============================
+============================== 20 passed, 45 failed in 3:51 ==============================
 ```
+
+**Status**: Infrastructure is working (database, migrations, token validation). 
+Remaining failures are due to response format mismatches and missing error handling.
+
+See `TEST-STATUS.md` for detailed breakdown of issues and fixes needed.
 
 ### Coverage Output:
 ```

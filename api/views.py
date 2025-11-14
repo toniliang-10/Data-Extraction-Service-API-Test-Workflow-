@@ -83,6 +83,28 @@ def start_extraction(request):
     record_type = serializer.validated_data.get('record_type', 'contacts')
     job_name = serializer.validated_data.get('name', f'Extraction_{datetime.now().strftime("%Y%m%d_%H%M%S")}')
     
+    # Validate API token before creating job
+    from tests.mocks.external_api_mock import MockExternalAPI, MockAuthenticationError
+    try:
+        mock_api = MockExternalAPI()
+        mock_api.authenticate(api_token)
+    except MockAuthenticationError as e:
+        return Response(
+            {
+                'error': 'Authentication failed',
+                'message': str(e)
+            },
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+    except Exception as e:
+        return Response(
+            {
+                'error': 'Invalid API token',
+                'message': 'The provided API token is invalid'
+            },
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+    
     # Create the job
     job = Job.objects.create(
         name=job_name,

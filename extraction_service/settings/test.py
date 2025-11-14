@@ -10,23 +10,18 @@ TESTING = True
 
 ALLOWED_HOSTS = ['*']
 
-# Use in-memory SQLite database for faster tests
+# Use file-based SQLite database for tests (allows migrations)
+import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
+        'NAME': os.path.join(BASE_DIR, 'test_db.sqlite3'),
     }
 }
 
-# Disable migrations for faster test execution
-class DisableMigrations:
-    def __contains__(self, item):
-        return True
-
-    def __getitem__(self, item):
-        return None
-
-MIGRATION_MODULES = DisableMigrations()
+# Enable migrations for tests (required for database table creation)
+# Note: While disabling migrations speeds up tests, it prevents tables from being created
+# For this project, we keep migrations enabled to ensure proper database schema
 
 # Faster password hashing for tests
 PASSWORD_HASHERS = [
